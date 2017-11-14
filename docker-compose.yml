@@ -1,0 +1,18 @@
+version: "3.2"
+
+services:
+  mongo:
+    image: registry.gitlab.com/particle4dev/docker-mongo:mongo-3.4.10
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=development
+      - MONGO_INITDB_USERNAME=snail
+      - MONGO_INITDB_PASSWORD=development
+      - MONGO_INITDB_DATABASE=tests
+      - DEBUG=true
+    entrypoint: /usr/local/bin/auth-docker-entrypoint.sh
+    command: mongod
+    volumes:
+      - ./auth-docker-entrypoint.sh:/usr/local/bin/auth-docker-entrypoint.sh
+    ports:
+      - 27017:27017
